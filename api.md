@@ -31,7 +31,7 @@ Error: HTTP 400 Bad Request or HTTP
 
 Endpoint: /api/profile
 Request Type: Get
-Request params:/profileprofile?firstname=<name>
+Request params:/profileprofile?firstname=<email>
 Success: Http 200 OK
 Response Body: Retrieve available Profile
 Error: HTTP 400 Bad Request or HTTP

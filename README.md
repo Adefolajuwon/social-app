@@ -1,12 +1,11 @@
-To run this app locally, you need to follow this steps:
-
 ## Getting Started
 
-1. Clone the repository
-2. cd into app
-3. run npm install
-4. Set up environment variables:
+1. Clone the repository:git clone git@github.com:Adefolajuwon/social-app.git
+2. Install dependecies: run npm instal
+3. Set up environment variables: create a .env file
+4. run npm start
 
-Create a .env file in the root directory.
+Libraries Used:
+bcrypt,socketio,chai
 
-Specify the required environment variables in the .env file. For example: 5. run npm start 6.
+For more information visit [api documentation](/api.md)
