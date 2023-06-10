@@ -2,6 +2,7 @@ const Message = require('../models/chatModel');
 
 async function sendMessage(req, res) {
 	try {
+		console.log('Request reached the sendMessage function');
 		const { sender, receiver, message } = req.body;
 
 		const sendMessage = new Message({
@@ -16,7 +17,7 @@ async function sendMessage(req, res) {
 		res.status(200).json({ message: 'Message sent' });
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Failed to send message' });
+		res.status(401).json({ error: 'Failed to send message' });
 	}
 }
 
