@@ -5,7 +5,8 @@
 3. Set up environment variables: create a .env file
 4. run npm start
 
-Libraries Used:
-bcrypt,socketio,chai
+Adiitional Libraries Used:
+Bcrypt: For hashing passwords
+Chai: For testing
 
 For more information visit [api documentation](/api.md)
