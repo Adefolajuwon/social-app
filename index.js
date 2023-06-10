@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
-const io = require('socket.io')(server);
+const server = require('./server.js');
+app.use('/api', routes);
 
+const io = require('socket.io')(server);
 io.on('connection', (socket) => {
 	console.log('New user connected');
 
@@ -30,5 +32,4 @@ io.on('connection', (socket) => {
 	});
 });
 
-app.use('/api', routes);
 module.exports = app;
