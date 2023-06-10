@@ -2,17 +2,33 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
+const io = require('socket.io')(server);
 
-// const routes = require('./routes/routes.js');
-// app.use(express.json());
-// app.use((req, res, next) => {
-// 	console.log(req.body); // log the request body
-// 	next();
-// });
-// app.use(express.json()); // Add this line to parse JSON bodies
+io.on('connection', (socket) => {
+	console.log('New user connected');
 
-// app.use('/api', routes);
-// app.use('/api', bodyParser.json()); // Parse JSON bodies
-app.use(express.json());
+	socket.on('message', (data) => {
+		console.log('Your Message: ', data);
+		io.emit('message', data);
+	});
+
+	socket.on('joinRoom', (room) => {
+		console.log(`${socket.id} just joined room ${room}`);
+
+		socket.join(room);
+
+		io.to(room).emit('roomJoined', `${socket.id} just joined the room`);
+	});
+
+	// Handle disconnection.
+	socket.on('leaveRoom', (room) => {
+		console.log(`${socket.id} has left room ${room}`);
+
+		socket.leave(room);
+
+		io.to(room).emit('roomLeft', `${socket.id} has left the room`);
+	});
+});
+
 app.use('/api', routes);
 module.exports = app;

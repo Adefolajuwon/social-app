@@ -1,38 +1,6 @@
 const Profile = require('../models/profileModel.js');
 const bcrypt = require('bcrypt');
 
-// async function createProfile(req, res) {
-// 	try {
-// 		const { firstname, lastname, age, email, password } = req.body;
-// 		req.body.password = await bcrypt.hash(req.body.password, 10);
-
-// 		if (
-// 			!lastname ||
-// 			!firstname ||
-// 			!email ||
-// 			!age ||
-// 			!password ||
-// 			!email.endsWith('.com')
-// 		) {
-// 			res.status(400).json({ error: 'Input all fields' });
-// 			return;
-// 		} else {
-// 			const profile = await Profile.create({
-// 				lastname,
-// 				firstname,
-// 				email,
-// 				age,
-// 				password,
-// 			});
-
-// 			res.status(200).json({ profile });
-// 		}
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.status(500).json({ error: 'Unable to create user' });
-// 	}
-// }
-
 async function createProfile(req, res) {
 	try {
 		const { firstname, lastname, age, email, password } = req.body;
@@ -78,22 +46,25 @@ async function createProfile(req, res) {
 
 async function getProfile(req, res) {
 	try {
-		const { email } = req.query; // or req.params depending on how you send the parameter
+		const { email } = req.params; // or req.params depending on how you send the parameter
 		const profile = await Profile.findOne({ email });
 		res.status(200).json(profile);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: 'Unable to retrieve user profile' });
+		res.status(500).json({
+			error: 'Failed to retrieve user profile',
+			message: error.message,
+		});
 	}
 }
 
 async function editProfile(req, res) {
 	try {
-		const { username } = req.params;
-		const { name, age, email, password } = req.body;
+		const { email } = req.params;
+		const { name, age, password } = req.body;
 
 		// Find the user profile
-		const userProfile = await Profile.findOne({ username });
+		const userProfile = await Profile.findOne({ email });
 
 		// Check if the user profile exists
 		if (!userProfile) {
@@ -109,7 +80,6 @@ async function editProfile(req, res) {
 		// Update the user profile
 		userProfile.name = name;
 		userProfile.age = age;
-		userProfile.email = email;
 		await userProfile.save();
 
 		res.json(userProfile);
