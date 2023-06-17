@@ -14,7 +14,7 @@ Endpoint: /api/message
 Request Type: Get
 Request Query: {sender, reciever}
 Success: HTTP 200 OK
-Response Body: Retrieved Message
+Response Body: Retrieved Message.
 Error: HTTP 400 Bad Request or HTTP
 
 Endpoint: /api/profile
@@ -39,6 +39,6 @@ Error: HTTP 400 Bad Request or HTTP
 Endpoint: /api/profile/:username
 Request Type: Put
 Request params:/profileprofile?firstname=<name>
-Success: Http 200 OK
+Success: Http 200
 Response Body: Update available Profile
 Error: HTTP 400 Bad Request or HTTP
