@@ -57,7 +57,7 @@ describe('Profile API', () => {
 		it('should retrieve a profile by email', (done) => {
 			chai
 				.request(app)
-				.get('/profile/johndoe@example.com')
+				.get('/profile/johnndoe@example.com')
 				.end((err, res) => {
 					assert.equal(res.status, 200);
 					assert.isObject(res.body);
