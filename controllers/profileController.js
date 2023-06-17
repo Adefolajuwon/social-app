@@ -63,7 +63,7 @@ async function editProfile(req, res) {
 		const { email } = req.params;
 		const { name, age, password } = req.body;
 
-		// Find the user profile
+		// Find the user profile.
 		const userProfile = await Profile.findOne({ email });
 
 		// Check if the user profile exists
